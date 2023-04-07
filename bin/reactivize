@@ -1,0 +1,25 @@
+#!/usr/bin/env node
+
+const { generateProject } = require("../src/");
+const program = require("commander");
+
+program
+  .version("1.0.0")
+  .description("Generate a new React project")
+  .arguments("<projectName>")
+  .option("-t, --no-typescript", "Do not use TypeScript")
+  .option("-r, --no-redux", "Do not use Redux")
+  .option("-u, --no-router", "Do not use React Router")
+  .action((projectName, options) => {
+    const projectConfig = {
+      useTypeScript: options.typescript,
+      useRedux: options.redux,
+      useRouter: options.router,
+    };
+
+    generateProject(projectName, projectConfig).catch((error) => {
+      console.error(error);
+      process.exit(1);
+    });
+  })
+  .parse(process.argv);

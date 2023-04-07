@@ -1,0 +1,30 @@
+import React from 'react';
+import { useSelector } from 'react-redux';
+import useExampleData from '../hooks/useExampleData';
+
+const Header = () => {
+  const data = useExampleData();
+  const exampleData = useSelector((state) => state.example.data);
+
+  return (
+    <header>
+      <nav>
+        <ul>
+          <li>
+            <a href="/">Home</a>
+          </li>
+        </ul>
+      </nav>
+      <div>
+        <h3>Example Data:</h3>
+        <ul>
+          {exampleData.map((item) => (
+            <li key={item.id}>{item.name}</li>
+          ))}
+        </ul>
+      </div>
+    </header>
+  );
+};
+
+export default Header;

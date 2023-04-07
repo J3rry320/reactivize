@@ -1,0 +1,15 @@
+import { fetchData } from '../../api';
+import {EXAMPLE_CONSTANTS} from '../constants';
+export const fetchDataSuccess = (data) => ({
+  type: EXAMPLE_CONSTANTS,
+  payload: data,
+});
+
+export const fetchExampleData = () => async (dispatch) => {
+  try {
+    const data = await fetchData();
+    dispatch(fetchDataSuccess(data));
+  } catch (error) {
+    console.error('Error fetching data:', error);
+  }
+};

@@ -1,0 +1,15 @@
+import {EXAMPLE_CONSTANTS} from '../constants';
+const initialState = {
+  data: [],
+};
+
+const exampleReducer = (state = initialState, action) => {
+  switch (action.type) {
+    case EXAMPLE_CONSTANTS:
+      return { ...state, data: action.payload };
+    default:
+      return state;
+  }
+};
+
+export default exampleReducer;

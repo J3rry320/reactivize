@@ -1,0 +1,14 @@
+import { useEffect } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
+import { fetchExampleData } from '../actions';
+
+const useExampleData = () => {
+  const data = useSelector((state) => state.example.data);
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(fetchExampleData());
+  }, [dispatch]);
+
+  return data;
+};
