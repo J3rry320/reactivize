@@ -1,0 +1,32 @@
+import React,{useRef,useEffect} from 'react';
+import { useSelector } from 'react-redux';
+import PackageCard from '../components/PackageCard';
+import SocialMedia from '../components/SocialMedia';
+import introvideo from '../assets/media/reactivize.mp4';
+
+const HomePage = () => {
+  const packages = useSelector((state) => state.packages);
+  const vidRef=useRef();
+  useEffect(() => { vidRef.current.play(); },[]);
+  return (
+    <div className="home-page">
+      <video  src={introvideo} width="50%" 
+      height="400" controls={false} loop  autoPlay muted ref={vidRef} />
+      <h1>Thankyou for using Reactivize!!</h1>
+      <h2>Check out my awesome packages:</h2>
+      <div className="package-list">
+        {packages.map((pkg) => (
+          <PackageCard
+            key={pkg.title}
+            title={pkg.title}
+            description={pkg.description}
+            link={pkg.link}
+          />
+        ))}
+      </div>
+      <SocialMedia />
+    </div>
+  );
+};
+
+export default HomePage;

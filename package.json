@@ -1,23 +1,50 @@
 {
   "name": "reactivize",
   "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
+  "description": "A CLI tool to generate a new React project with optional configurations.",
+  "main": "./dist/index.js",
+  "module": "./dist/index.mjs",
+  "source": "bin/reactivize",
   "bin": {
-    "reactivize": "bin/generator.js"
+    "reactivize": "dist/index.js"
   },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "microbundle",
+    "dev": "node bin/reactivize test-app --no-typescript"
   },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
+  "keywords": [
+    "react",
+    "reactjs",
+    "project-generator",
+    "cli-tool",
+    "typescript",
+    "redux",
+    "react-router",
+    "project-setup",
+    "configuration",
+    "developer-tool"
+  ],
+  "author": "J3 SA7PA7HY <j3@nobunagadesignlabs.com>",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/J3rry320/reactivize"
+  },
+  "bugs": {
+    "url": "https://github.com/J3rry320/reactivize/issues"
+  },
+  "homepage": "https://github.com/J3rry320/reactivize#readme",
   "dependencies": {
     "commander": "^10.0.0",
     "fs-extra": "^11.1.1",
     "handlebars": "^4.7.7"
   },
   "devDependencies": {
-    "winston": "^3.8.2"
-  }
+    "winston": "^3.8.2",
+    "microbundle": "^0.15.1"
+  },
+  "files": [
+    "dist/"
+  ]
 }

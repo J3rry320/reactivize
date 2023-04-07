@@ -8,7 +8,7 @@ module.exports = (env, argv) => {
   const isProduction = argv.mode === 'production';
 
   return {
-    entry: './src/index.js',
+    entry: './src/index.jsx',
     output: {
       path: path.resolve(__dirname, 'build'),
       filename: 'static/js/[name].[contenthash:8].js',
@@ -38,6 +38,10 @@ module.exports = (env, argv) => {
             limit: 10000,
             name: 'static/media/[name].[hash:8].[ext]',
           },
+        },
+        {
+          test: /\.mp4$/,
+          use: 'file-loader?name=videos/[name].[ext]',
         },
       ],
     },

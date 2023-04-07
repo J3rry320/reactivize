@@ -1,0 +1,30 @@
+const initialState = [
+  {
+    title: 'react-typing-animator',
+    description:
+      'A simple yet powerful React component to create typing animations, making your application more interactive and engaging.',
+    link: 'https://www.npmjs.com/package/react-typing-animator',
+  },
+  {
+    title: 'markdown-parser-react',
+    description:
+      'A lightweight and customizable React component that parses and renders Markdown content, making it easy to add rich text content to your projects.',
+    link: 'https://www.npmjs.com/package/markdown-parser-react',
+  },
+  {
+    title: 'react-network-notifier',
+    description:
+      'A handy React component that displays network status notifications, ensuring your users are always informed about their connectivity.',
+    link: 'https://www.npmjs.com/package/react-network-notifier',
+  },
+];
+
+const packagesReducer = (state = initialState, action) => {
+  switch (action.type) {
+    // Add cases for actions if needed
+    default:
+      return state;
+  }
+};
+
+export default packagesReducer;

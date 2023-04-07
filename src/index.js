@@ -13,8 +13,8 @@ const logger = winston.createLogger({
     winston.format.printf(({ timestamp, level, message }) => {
       const colors = { info: "blue", warn: "yellow", error: "red" };
       const color = colors[level] || "white";
-      const emojis = { info: "🚀", warn: "🤔", error: "😱" };
-      const emoji = emojis[level] || "📝";
+      const emojis = { info: ["🚀", "👍🏻"], warn: "🤔", error: "😱" };
+      const emoji = emojis[level] || "🚀 👍🏻 📝";
       return `[${timestamp}] ${emoji} ${level.toUpperCase()} ${message} ${emoji}`;
     })
   ),
@@ -23,12 +23,37 @@ const logger = winston.createLogger({
 
 async function generateProject(projectName, projectConfig) {
   const projectDir = path.join(process.cwd(), projectName);
+  const { useTypeScript, deployService, useRedux, useRouter } = projectConfig;
+
+  // Set the appropriate deploy command based on the chosen deploy service
+  let deployCommand = "";
+  if (deployService) {
+    switch (deployService.toLowerCase()) {
+      case "heroku":
+        deployCommand = "git push heroku master";
+        break;
+      case "netlify":
+        deployCommand = "netlify deploy";
+        break;
+      case "github-pages":
+        deployCommand = "gh-pages -d build";
+        break;
+      case "firebase":
+        deployCommand = "firebase deploy";
+        break;
+      default:
+        console.error(
+          "Invalid deploy service. Supported services: heroku, netlify, github-pages, firebase"
+        );
+        process.exit(1);
+    }
+  }
 
   const templateDir = path.join(
     __dirname,
-
     "templates",
-    projectConfig.useTypeScript ? "ts" : "js"
+    // useTypeScript ? "ts" : "js"
+    "js"
   );
 
   logger.info(`Let's make ${projectName} great again, folks!`);
@@ -48,8 +73,6 @@ async function generateProject(projectName, projectConfig) {
     logger.info("Copying the most tremendous template files...");
     await fs.copy(templateDir, projectDir);
     logger.info("Believe me, we copied the template files successfully!");
-    logger.info(`Template directory: ${templateDir}`);
-    logger.info(`Project directory: ${projectDir}`);
   } catch (err) {
     logger.error(
       `Can't copy the templates, folks! Something went wrong: ${err}. Belive Me! Mexico will pay for this`
@@ -58,8 +81,13 @@ async function generateProject(projectName, projectConfig) {
   }
 
   logger.info("Processing the best templates, trust me...");
-  logger.info(`Template directory: ${templateDir}`);
-  await processTemplates(projectDir, { projectName, ...projectConfig });
+  await processTemplates(projectDir, {
+    projectName,
+    useTypeScript,
+    useRedux,
+    useRouter,
+    deployCommand,
+  });
 
   try {
     logger.info(
@@ -98,7 +126,7 @@ async function processTemplates(dir, data) {
         );
       }
     } else {
-      logger.info(`Found a non-template file: ${filepath}`);
+      logger.info(`Loading Bigly Assets`);
     }
   }
 }
