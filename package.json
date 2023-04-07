@@ -1,16 +1,16 @@
 {
   "name": "reactivize",
-  "version": "1.0.0",
+  "version": "1.1.1",
   "description": "A CLI tool to generate a new React project with optional configurations.",
   "main": "./dist/index.js",
   "module": "./dist/index.mjs",
   "source": "bin/reactivize",
   "bin": {
-    "reactivize": "dist/index.js"
+    "reactivize": "./dist/index.js"
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "build": "microbundle",
+    "build": "webpack",
     "dev": "node bin/reactivize test-app --no-typescript"
   },
   "keywords": [
@@ -38,11 +38,15 @@
   "dependencies": {
     "commander": "^10.0.0",
     "fs-extra": "^11.1.1",
-    "handlebars": "^4.7.7"
+    "handlebars": "^4.7.7",
+    "winston": "^3.8.2"
   },
   "devDependencies": {
-    "winston": "^3.8.2",
-    "microbundle": "^0.15.1"
+    "copy-webpack-plugin": "^11.0.0",
+    "terser-webpack-plugin": "^5.3.7",
+    "webpack": "^5.78.0",
+    "webpack-cli": "^5.0.1",
+    "webpack-node-externals": "^3.0.0"
   },
   "files": [
     "dist/"

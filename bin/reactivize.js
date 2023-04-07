@@ -1,6 +1,4 @@
-#!/usr/bin/env node
-
-const { generateProject } = require("../src/");
+const { generateProject } = require("../src");
 const program = require("commander");
 
 program
