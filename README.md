@@ -3,6 +3,7 @@
   
 
 ![REACTIVIZE](https://iili.io/HehSO4s.png)
+![npm](https://img.shields.io/npm/v/reactivize)  ![npm bundle size](https://img.shields.io/bundlephobia/min/reactivize)
 
 ***Reactivize is a modern and flexible alternative to Create React App that allows you to generate a fully configured React project with just a single command***. It's the result of my personal experience and preference for creating React projects using Webpack. I found that this approach offered a more streamlined and efficient development experience compared to Create React App, and I wanted to share this powerful tool with the community.
 
