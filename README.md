@@ -290,3 +290,11 @@ Reactivize is under active development, and we have plans to add more features a
   
 
 Reactivize is licenced under the [MIT Licence](https://github.com/J3rry320/reactivize/blob/main/LICENSE).
+
+## Support
+
+If you find Reactivize helpful, please consider leaving a ⭐️ [star](https://github.com/J3rry320/reactivize/stargazers) on the GitHub repository. Your support is greatly appreciated!
+
+### Buy me a coffee
+
+If you'd like to further support the development of Reactivize, you can [buy me a coffee ☕](https://www.buymeacoffee.com/j3satpathy). Every coffee helps me stay energized and committed to maintaining and improving the project. Thank you!
