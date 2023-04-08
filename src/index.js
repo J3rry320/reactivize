@@ -2,24 +2,15 @@ const fs = require("fs-extra");
 const path = require("path");
 const { execSync } = require("child_process");
 const handlebars = require("handlebars");
-const winston = require("winston");
+const logger = require("./logger");
+const { renderImage, renderText } = require("./artGenerator");
+const { messageConfig, personality } = require("./config");
+const choosenPersonality = Math.floor(Math.random() * (personality.length - 1));
+function getRandomMessage(step) {
+  const messages = messageConfig[step];
 
-// Set up the Winston logger
-const logger = winston.createLogger({
-  level: "info",
-  format: winston.format.combine(
-    winston.format.colorize(),
-    winston.format.timestamp(),
-    winston.format.printf(({ timestamp, level, message }) => {
-      const colors = { info: "blue", warn: "yellow", error: "red" };
-      const color = colors[level] || "white";
-      const emojis = { info: ["🚀", "👍🏻"], warn: "🤔", error: "😱" };
-      const emoji = emojis[level] || "🚀 👍🏻 📝";
-      return `[${timestamp}] ${emoji} ${level.toUpperCase()} ${message} ${emoji}`;
-    })
-  ),
-  transports: [new winston.transports.Console()],
-});
+  return messages[personality[choosenPersonality]];
+}
 
 async function generateProject(projectName, projectConfig) {
   const projectDir = path.join(process.cwd(), projectName);
@@ -52,31 +43,26 @@ async function generateProject(projectName, projectConfig) {
   const templateDir = path.join(
     __dirname,
     "templates",
-    // useTypeScript ? "ts" : "js"
-    "js"
+    useTypeScript ? "ts" : "js"
   );
 
-  logger.info(`Let's make ${projectName} great again, folks!`);
-
+  logger.info(`Let's make ${projectName} great again, folks 🇺🇸!`);
+  logger.info(renderImage("../templates/js/src/assets/media/coder.jpg"));
   try {
-    logger.info(`Creating the ${projectName} project directory...`);
+    getRandomMessage("createProject");
     await fs.mkdir(projectDir);
-    logger.info(
-      `Bigly success! We created the ${projectName} project directory.`
-    );
+    logger.info(`We have created the ${projectName} project directory.`);
   } catch (err) {
-    logger.error(`SAD! Couldn't create the project directory: ${err}`);
+    getRandomMessage("error");
     return;
   }
 
   try {
-    logger.info("Copying the most tremendous template files...");
+    getRandomMessage("copyTemplates");
     await fs.copy(templateDir, projectDir);
     logger.info("Believe me, we copied the template files successfully!");
   } catch (err) {
-    logger.error(
-      `Can't copy the templates, folks! Something went wrong: ${err}. Belive Me! Mexico will pay for this`
-    );
+    getRandomMessage("error");
     return;
   }
 
@@ -90,20 +76,19 @@ async function generateProject(projectName, projectConfig) {
   });
 
   try {
-    logger.info(
-      "Installing some tremendous dependencies, you won't believe it..."
-    );
+    getRandomMessage("installDependencies");
     execSync(`cd ${projectName} && npm install`, {
       stdio: "inherit",
     });
     logger.info(`All the dependencies were installed bigly, believe me!`);
   } catch (err) {
-    logger.error(`Folks, we've got a problem with the dependencies: ${err}`);
+    getRandomMessage("error");
     return;
   }
 
-  logger.info(`We did it, folks! ${projectName} is a beautiful project.`);
-  logger.info("Thanks for using our generator, you have a very big brain!");
+  getRandomMessage("success");
+  logger.info("Thankyou! for using our generator, you have a very big brain!");
+  logger.info(renderText("RATE THE REPO", "doom"));
 }
 async function processTemplates(dir, data) {
   const files = await fs.readdir(dir);

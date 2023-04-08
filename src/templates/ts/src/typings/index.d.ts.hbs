@@ -1,0 +1,9 @@
+declare module {{projectName}} {
+    export type Maybe<T> = T | undefined; 
+    interface Package { 
+        title: string;
+        link: string;
+        description: string;
+    }
+    type Packages = Package[];
+}

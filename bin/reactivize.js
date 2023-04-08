@@ -9,7 +9,7 @@ program
   .option("-nrd, --no-redux", "Do not use Redux")
   .option("-nro, --no-router", "Do not use React Router")
   .option(
-    "-nd, --deploy <service>",
+    "-d <service>, --deploy <service>",
     "Choose a deploy service (heroku|netlify|github-pages|firebase)"
   )
   .action((projectName, options) => {

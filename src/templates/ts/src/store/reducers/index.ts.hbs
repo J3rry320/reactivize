@@ -1,0 +1,9 @@
+import { combineReducers } from 'redux';
+import packagesReducer from './packagesReducer';
+
+const rootReducer = combineReducers({
+  packages: packagesReducer,
+  // Add other reducers here
+});
+
+export default rootReducer;

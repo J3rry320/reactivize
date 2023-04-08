@@ -1,0 +1,34 @@
+import React from 'react';
+import * as ReactDOMClient from 'react-dom/client';
+{{#if useRedux}}import { Provider } from 'react-redux';
+import store from './store';{{/if}}
+import './index.css';
+import './styles/style.css';
+{{#if useRouter}}
+import {
+  createBrowserRouter,
+  RouterProvider,
+} from "react-router-dom";
+import HomePage from './pages/Home';
+import NotFoundPage from './pages/NotFound';
+{{else}}
+import HomePage from './pages/HomePage';
+{{/if}}
+
+//TODO Move this to a routes.js file for code cleanliness.
+const router = createBrowserRouter([
+  {
+    path: "/",
+    element: <HomePage/>,
+  },
+]);
+
+const container = document.getElementById('root');
+const root = ReactDOMClient.createRoot(container);
+root.render(
+  <React.StrictMode>
+    <Provider store={store}>
+    <RouterProvider router={router} />
+    </Provider>
+  </React.StrictMode>
+);
